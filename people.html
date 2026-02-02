@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INOX Quantum Materials Lab</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- AOS Animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: rgba(15, 15, 15, 0.98) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+
+  
+
+
+    /* Sections */
+    section {
+      padding: 100px 0;
+    }
+
+/* ===== PEOPLE SECTION ===== */
+
+.people-section {
+  padding: 80px 0;
+  background: #f7f9fc;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+}
+
+/* ===== PERSON CARD ===== */
+.person-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px 24px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.person-card:hover {
+  transform: translateY(-6px);
+}
+
+/* ===== PHOTO ===== */
+.person-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #4dabff;
+}
+
+/* ===== TEXT ===== */
+.person-name {
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-top: 10px;
+}
+
+.person-role {
+  color: #4dabff;
+  font-weight: 500;
+}
+
+.person-email {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.subtext {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* ===== PI CARD ===== */
+.pi-card {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .pi-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">INOX Quantum Materials Lab</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#labNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="labNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+        <li class="nav-item"><a class="nav-link" href="people.html">People</a></li>
+        <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+        <li class="nav-item"><a class="nav-link" href="work-with-us.html">Work With Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="people-section">
+  <div class="container">
+
+    <!-- TITLE -->
+    <h2 class="text-center section-title">People</h2>
+
+    <!-- ================= PI ================= -->
+
+    <div class="person-card pi-card mb-5" data-aos="fade-up">
+      <img src="images/people/dhavala.jpg" class="person-photo" alt="Dr. Dhavala Suri">
+
+      <div>
+        <h4 class="person-name">Dr. Dhavala Suri</h4>
+        <div class="person-role">Assistant Professor, Indian Institute of Science, Bengaluru</div>
+        <div class="person-email">dsuri@iisc.ac.in</div>
+
+        <ul class="mt-3 subtext">
+          <li>2023–onwards: Assistant Professor, Indian Institute of Science, Bengaluru</li>
+          <li>2021–2023: Postdoctoral Scientist at Technical University of Munich, Germany</li>
+          <li>2020–2021: Postdoctoral Fellow at Tata Institute of Fundamental Research – Hyderabad, India</li>
+          <li>2018–2020: Postdoctoral Associate at Massachusetts Institute of Technology, USA</li>
+          <li>2013–2018: Ph.D. from BITS Pilani, K K Birla Goa Campus, Goa, India</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- ================= CURRENT MEMBERS ================= -->
+    <h3 class="mb-4">Current Members</h3>
+
+    <div class="row g-4">
+
+      <!-- MEMBER -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/subranshu.jpg" class="person-photo mb-3">
+          <div class="person-name">Subhransu Kumar Negi</div>
+          <div class="person-email">subhransun@iisc.ac.in</div>
+          <div class="subtext">PhD Scholar<br>M.Tech Material Science, IIT Kharagpur</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/rajib.jpg" class="person-photo mb-3">
+          <div class="person-name">Rajib Sarkar</div>
+          <div class="person-email">rajibsakar@iisc.ac.in</div>
+          <div class="subtext">PhD Scholar<br>BS-MS Physics, IISER Kolkata</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/sohini.jpg" class="person-photo mb-3">
+          <div class="person-name">Sohini Guin</div>
+          <div class="person-email">sohiniguin@iisc.ac.in</div>
+          <div class="subtext">PhD Scholar<br>MSc Physics, NIT Durgapur</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/suju.jpg" class="person-photo mb-3">
+          <div class="person-name">Sujubkang Daimary</div>
+          <div class="person-email">sujubkangd@iisc.ac.in</div>
+          <div class="subtext">PhD Scholar<br>B.Tech & M.Tech, IIT (BHU) Varanasi</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/shyam.jpg" class="person-photo mb-3">
+          <div class="person-name">Shyam Sundar Poriah</div>
+          <div class="person-email">shyamporiah@iisc.ac.in</div>
+          <div class="subtext">PhD Scholar<br>MSc Physics, NIT Durgapur</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/ramesh.jpg" class="person-photo mb-3">
+          <div class="person-name">Ramesh Kumar Guin</div>
+          <div class="person-email">rameshguin@iisc.ac.in</div>
+          <div class="subtext">PhD Scholar<br>MSc Physics, IIT Kharagpur</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/aryamann.png" class="person-photo mb-3" alt="Aryaman Das">
+          <div class="person-name">Aryaman Das</div>
+          <div class="person-role">Junior Research Fellow</div>
+          <div class="person-email">aryamandas@iisc.ac.in</div>
+          <div class="subtext">
+            B.E. – M.Sc.<br>
+            BITS Pilani, Pilani Campus
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/atharva.jpg" class="person-photo mb-3" alt="Atharv Dubey">
+          <div class="person-name">Atharv Dubey</div>
+          <div class="person-role">Project Assistant</div>
+          <div class="subtext">
+            B.Sc. Physics<br>
+            Azim Premji University
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/naresh.jpg" class="person-photo mb-3" alt="Naresh Shyaga">
+          <div class="person-name">Naresh Shyaga</div>
+          <div class="person-role">Postdoctoral Fellow</div>
+          <div class="person-email">nareshshyaga@iisc.ac.in</div>
+          <div class="subtext">
+            PhD, University of Hyderabad
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/laxmipriya.jpg" class="person-photo mb-3" alt="Laxmipriya Nanda">
+          <div class="person-name">Laxmipriya Nanda</div>
+          <div class="person-role">Postdoctoral Fellow</div>
+          <div class="person-email">laxmipriyan@iisc.ac.in</div>
+          <div class="subtext">
+            PhD, NISER Bhubaneswar
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/pankaj.jpg" class="person-photo mb-3" alt="Pankaj Bhardwaj">
+          <div class="person-name">Pankaj Bhardwaj</div>
+          <div class="person-role">Postdoctoral Fellow</div>
+          <div class="person-email">pankajb@iisc.ac.in</div>
+          <div class="subtext">
+            PhD, NIT Hamirpur
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="person-card text-center">
+          <img src="images/people/suchandra.jpg" class="person-photo mb-3" alt="Suchandra Mukherjee">
+          <div class="person-name">Suchandra Mukherjee</div>
+          <div class="person-role">Postdoctoral Fellow</div>
+          <div class="subtext">
+            PhD, University of Calcutta
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+<hr class="my-5">
+
+<h3 class="fw-bold mb-4">Undergraduate Thesis Students (2024–2025)</h3>
+<ul class="list-unstyled fs-5 mb-5">
+  <li>Akash Bedre — BITS Pilani, K. K. Birla Goa Campus, Goa</li>
+  <li>Vivek Kumar — IISc Bengaluru</li>
+  <li>Mokshagna Tanniru — IISc Bengaluru</li>
+  <li>Sanjana D. S. — IISc Bengaluru</li>
+</ul>
+
+<h3 class="fw-bold mb-4">M.Tech Thesis Students (2024–2025)</h3>
+<ul class="list-unstyled fs-5 mb-5">
+  <li>Shubham Harish Singh — M.Tech Quantum Technology, IISc Bengaluru</li>
+</ul>
+
+<h3 class="fw-bold mb-4">Past Members</h3>
+<ul class="list-unstyled fs-5">
+  <li>K. S. Surabhi — Short-term visiting postdoctoral fellow (presently at Harvard University, USA)</li>
+  <li>Sonali Suzanne Noronha — Project Assistant</li>
+  <li>Akash Kumar Gaur — Masters thesis intern, Amity University</li>
+  <li>Aryaman Das — Masters thesis intern (2023–2024), BITS Pilani; INOX intern</li>
+  <li>Animesh Baral — Masters thesis intern (2023–2024), Visva-Bharati; INOX intern</li>
+  <li>Gaurav Salwan — Masters thesis intern (2023–2024), IISER Tirupati; INOX intern</li>
+  <li>Jagadish R — Postdoctoral Fellow (2023–2025)</li>
+</ul>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- Footer -->
+<footer class="text-center py-4">
+  <p class="mb-0">© 2026 INOX Quantum Materials Lab</p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true, duration: 900, easing: 'ease-out-cubic' });
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    once: true
+  });
+</script>
+
+
+</body>
+</html>

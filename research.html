@@ -34,160 +34,140 @@
 
     /* Sections */
     section {
-      padding: 100px 0;
+      padding: 10px 0;
     }
 
-/* Research section */
-.research-section {
-  background: #0f172a; /* dark elegant background */
-  color: #e5e7eb;
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: rgba(15, 15, 15, 0.98) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+
+    
+
+    .research-img {
+      width: 100%;        /* adjust: 360–420px looks good */
+      object-fit: cover;    /* fills area without distortion */
+    }
+
+
+.research-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 80px 0 50px;
 }
 
-/* ===== Topological Insulators Section ===== */
-.topo-dark-section {
-  background: radial-gradient(circle at top left,#0b0b0b, #034520);
-  padding: 120px 0;
-  color: #eaeaea;
+.research-divider span {
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #333;
+  background: #f8f9fa;
+  padding: 0 18px;
+  white-space: nowrap;
 }
 
-.topo-dark-section h2 {
-  color: #ffffff;
-  font-size: 2.8rem;
+.research-divider .sine {
+  width: 220px;
+  height: 40px;
+  overflow: hidden; /* VERY IMPORTANT */
 }
 
-.topo-text {
-  color: #b5b5b5;
-  max-width: 90%;
+.research-divider .sine.right {
+  transform: scaleX(-1);
 }
 
-/* Image control (THIS fixes your size issue) */
-.topo-img {
-  width: 100%;
-  max-width: 520px;   /* increase this if you want bigger */
-  transform: scale(1.05);
+/* ---- WAVE MOTION ---- */
+.wave-move {
+  animation: waveSlide 3s linear infinite;
 }
 
-/* Animated underline */
-.topo-underline {
-  width: 90px;
-  height: 3px;
-  background: linear-gradient(90deg, #4dabff, #2ecc71);
-  box-shadow: 0 0 15px rgba(77,171,255,0.6);
+@keyframes waveSlide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-60px);
+  }
 }
 
 
-/* White background explicitly */
-.bg-white {
-  background-color: #ffffff;
-}
+    #quantumParticles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* behind text */
+      pointer-events: none;
+    }
+        /* Electron animation canvas */
+    #electronCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-/* Image styling */
-.super-img {
-  max-height: 460px;
-  object-fit: cover;
-}
-
-/* Underline reused from previous section */
-.title-underline {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #0d6efd, #20c997);
-  border-radius: 2px;
-}
-
-/* Aura fly-in animation */
-.aura-fly-in {
+.research-intro-section {
   position: relative;
-  animation: flyFromTop 1.6s ease-out forwards;
-  filter: blur(6px);
-  opacity: 0;
+  padding: 120px 0;        /* controls height */
+  background-image: url("images/quantum.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
 
-/* Glow aura */
-.aura-fly-in::before {
-  content: "";
+/* Dark overlay to make image subtle */
+.research-overlay {
   position: absolute;
-  inset: -30px;
-  background: radial-gradient(
-    circle,
-    rgba(0, 200, 255, 0.35),
-    transparent 70%
-  );
-  z-index: -1;
-  filter: blur(25px);
-  opacity: 0;
-  animation: auraGlow 1.6s ease-out forwards;
+  inset: 0;
 }
 
-/* Keyframes */
-@keyframes flyFromTop {
-  0% {
-    transform: translateY(-120px) scale(0.95);
-    opacity: 0;
-    filter: blur(8px);
-  }
-  70% {
-    transform: translateY(10px) scale(1.02);
-    opacity: 1;
-    filter: blur(2px);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-    filter: blur(0);
-  }
+/* Text styling */
+.research-intro-section h2 {
+  font-size: 3rem;
+  letter-spacing: 1px;
 }
 
-@keyframes auraGlow {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-}
-
-/* Interfaces section background */
-.interfaces-section {
-  background: linear-gradient(
-    135deg,
-    #f4f6f8 0%,
-    #eef1f4 50%,
-    #f8f9fa 100%
-  );
-}
-
-/* Image styling */
-.interface-img {
-  max-width: 100%;
-  transform: scale(1.02);
-}
-
-/* Thin interface divider */
-.interface-divider {
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(
-    to right,
-    #0d6efd,
-    #20c997,
-    #adb5bd
-  );
-  border-radius: 2px;
-}
-
-/* Text reveal polish */
-.reveal-text {
+.research-intro-section p {
+  max-width: 800px;
+  margin: 0 auto;
   line-height: 1.7;
 }
 
+    /* BIG MOVING QUANTUM WAVE */
+    /* Top wave above the text */
+    /* Top wave above the text */
+.quantum-wave-top {
+  position: relative;       /* keep it in flow, won't cover content */
+  width: 100%;
+  height: 100px;            /* adjust for big wave */
+  pointer-events: none;
+  animation: waveMove 6s linear infinite; /* faster wave = 6s per cycle */
+  z-index: 0;
+}
 
+@keyframes waveMove {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-30%); }
+}
+
+
+    /* Glow effect for more “quantum aura” */
+.quantum-wave-top path {
+  filter: drop-shadow(0 0 12px rgba(77,171,255,0.5));
+}
 
 
 
@@ -205,135 +185,32 @@
     </button>
     <div class="collapse navbar-collapse" id="labNavbar">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/research.html">Research</a></li>
-        <li class="nav-item"><a class="nav-link" href="/people.html">People</a></li>
-        <li class="nav-item"><a class="nav-link" href="/publications.html">Publications</a></li>
-        <li class="nav-item"><a class="nav-link" href="/work-with-us.html">Work With Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="/gallery.html">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+        <li class="nav-item"><a class="nav-link" href="people.html">People</a></li>
+        <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+        <li class="nav-item"><a class="nav-link" href="work-with-us.html">Work With Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Research: Topological Insulators -->
-<section id="topological-insulators" class="topo-dark-section">
-  <div class="container">
-    <div class="row align-items-center g-4">
+<!-- Research Intro Section -->
+<section id="research-intro" class="research-intro-section">
+  <div class="research-overlay"></div>
 
-      <!-- Left: Image -->
-      <div class="col-lg-6">
-        <img src="images/research/topo1.png"
-             alt="Topological Insulators"
-             class="topo-img img-fluid shadow">
-      </div>
-
-      <!-- Right: Text -->
-      <div class="col-lg-6">
-        <h2 class="fw-bold mb-3">
-          <span id="topo-title"></span>
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 text-center text-light">
+        <h2 class="fw-bold mb-4">
+          <span style="color: rgb(80, 7, 198);">Research</span>
         </h2>
-
-        <div class="topo-underline mb-4"></div>
-
-        <p class="fs-5 topo-text">
-          Three dimensional topological insulators are those which have
-          insulating bulk and conducting surface states. We synthesize these
-          materials using the technique of molecular beam epitaxy and engineer
-          the properties to realize novel electronic and thermal states.
+        <p class="fs-4 opacity-90">
+          We study the physics of epitaxial materials and interfaces of the following class of materials.
         </p>
       </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Research: Superconductors -->
-<section id="superconductors" class="research-section bg-white">
-  <div class="container">
-    <div class="row align-items-center g-4">
-
-      <!-- Left: Text -->
-      <div class="col-lg-7"
-           data-aos="fade-right"
-           data-aos-delay="100">
-
-        <h2 class="fw-bold mb-3 text-dark">
-          Superconductors
-        </h2>
-
-        <div class="title-underline mb-4"></div>
-
-        <p class="fs-5 text-muted">
-          Superconductors are materials that exhibit zero electrical resistance
-          and perfect diamagnetism below a critical transition temperature.
-          Our work focuses on fabricating micro- and nano-scale devices from
-          these materials, enabling control and manipulation of their quantum
-          states using electrical gating and magnetic fields.
-        </p>
-      </div>
-
-      <!-- Right: Image -->
-      <!-- Right: Image -->
-      <div class="col-lg-5">
-        <div class="super-image-wrapper aura-fly-in">
-          <img
-            src="images/research/super1.png"
-            alt="Superconducting Devices"
-            class="img-fluid w-100 super-img rounded"
-          >
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-<!-- Research: Interfaces & Proximity Effects -->
-<section id="interfaces" class="interfaces-section">
-  <div class="container">
-    <div class="row align-items-center g-4">
-
-      <!-- Left: Image -->
-      <div class="col-lg-6">
-        <div class="interface-image-wrapper" data-aos="fade-right">
-          <img
-            src="images/research/interface1.png"
-            alt="Material Interfaces"
-            class="img-fluid rounded shadow interface-img"
-          >
-        </div>
-      </div>
-
-      <!-- Right: Text -->
-      <div class="col-lg-6">
-        <h2 class="fw-bold mb-4" data-aos="fade-up">
-          Interfaces of Quantum Materials
-        </h2>
-
-        <div class="interface-divider mb-4"></div>
-
-        <p class="fs-5 text-secondary reveal-text" data-aos="fade-up" data-aos-delay="100">
-          One way to engineer material properties is to use the concept of
-          <strong>proximity coupling</strong>. We interface materials of different kinds
-          and study the emergent interfacial properties.
-        </p>
-
-        <p class="fs-5 text-secondary reveal-text" data-aos="fade-up" data-aos-delay="200">
-          For instance, hybrids of superconductors and magnetic materials:
-          although superconductors and ferromagnets are opposite phenomena in nature,
-          <strong>triplet superconductivity</strong> allows for their coexistence.
-        </p>
-
-        <p class="fs-5 text-secondary reveal-text" data-aos="fade-up" data-aos-delay="300">
-          Likewise, surface state properties of topological insulators can be tuned
-          using magnetization in TI/magnetic insulator hybrids. We investigate
-          electronic properties of nano-devices fabricated from such hybrid systems.
-        </p>
-      </div>
-
     </div>
   </div>
 </section>
@@ -342,6 +219,148 @@
 
 
 
+<!-- Research Section -->
+<section class="bg-light" id="research">
+  <div class="container">
+    
+    <div class="research-divider">
+      <svg class="sine left" viewBox="0 0 300 40" preserveAspectRatio="none">
+        <path d="M0,20 
+                C20,0 40,40 60,20
+                C80,0 100,40 120,20
+                C140,0 160,40 180,20
+                C200,0 220,40 240,20
+                C260,0 280,40 300,20"
+              fill="none" stroke="#4dabff" stroke-width="2"/>
+      </svg>
+
+      <span>Topological Insulators</span>
+
+      <svg class="sine right" viewBox="0 0 300 40" preserveAspectRatio="none">
+        <path d="M0,20 
+                C20,0 40,40 60,20
+                C80,0 100,40 120,20
+                C140,0 160,40 180,20
+                C200,0 220,40 240,20
+                C260,0 280,40 300,20"
+              fill="none" stroke="#4dabff" stroke-width="2"/>
+      </svg>
+    </div>
+
+
+
+    <!-- Topological Insulators -->
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6" data-aos="fade-right">
+        <img src="images/research/topo1.png" class="img-fluid rounded shadow research-img" alt="Topological Insulators">
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <p class="mt-3">
+          Three-dimensional topological insulators possess an insulating bulk while supporting
+          conducting surface states protected by topology.
+        </p>
+        <p>
+          We synthesize these materials using molecular beam epitaxy (MBE) and engineer their
+          structural and electronic properties to realize novel electronic and thermal states.
+        </p>
+      </div>
+    </div>
+<div class="research-divider">
+  <svg class="sine left" viewBox="0 0 300 40" preserveAspectRatio="none">
+    <g class="wave-move">
+      <path d="M0,20 
+               C20,0 40,40 60,20
+               C80,0 100,40 120,20
+               C140,0 160,40 180,20
+               C200,0 220,40 240,20
+               C260,0 280,40 300,20"
+            fill="none" stroke="#4dabff" stroke-width="2"/>
+    </g>
+  </svg>
+
+  <span>Superconductors</span>
+
+  <svg class="sine right" viewBox="0 0 300 40" preserveAspectRatio="none">
+    <g class="wave-move">
+      <path d="M0,20 
+               C20,0 40,40 60,20
+               C80,0 100,40 120,20
+               C140,0 160,40 180,20
+               C200,0 220,40 240,20
+               C260,0 280,40 300,20"
+            fill="none" stroke="#4dabff" stroke-width="2"/>
+    </g>
+  </svg>
+</div>
+
+
+
+    <div class="row align-items-center mb-5 flex-md-row-reverse">
+      
+      <div class="col-md-6" data-aos="fade-left">
+        <img src="images/research/super2.png" class="img-fluid rounded shadow" alt="Superconductors" style="width: 70%;">
+      </div>
+      <div class="col-md-6" data-aos="fade-right">
+        <p class="mt-3">
+          Superconductors are materials that exhibit zero electrical resistance and perfect diamagnetism below a critical transition temperature. In this regime, electrons form coherent quantum states that can support dissipationless transport and macroscopic phase coherence
+        </p>
+        <p>
+          Our work focuses on fabricating micro- and nano-scale superconducting devices and studying how their quantum states evolve under controlled electrical gating and applied magnetic fields. By engineering device geometry and interfaces, we explore phenomena such as quantum interference, phase control, and field-tunable superconducting states, with the goal of understanding and manipulating superconductivity at the nanoscale.
+        </p>
+      </div>
+    </div>
+    <div class="research-divider">
+      <svg class="sine left" viewBox="0 0 300 40" preserveAspectRatio="none">
+        <path d="M0,20 
+                C20,0 40,40 60,20
+                C80,0 100,40 120,20
+                C140,0 160,40 180,20
+                C200,0 220,40 240,20
+                C260,0 280,40 300,20"
+              fill="none" stroke="#4dabff" stroke-width="2"/>
+      </svg>
+
+      <span>Interface & Hybrid Structures</span>
+
+      <svg class="sine right" viewBox="0 0 300 40" preserveAspectRatio="none">
+        <path d="M0,20 
+                C20,0 40,40 60,20
+                C80,0 100,40 120,20
+                C140,0 160,40 180,20
+                C200,0 220,40 240,20
+                C260,0 280,40 300,20"
+              fill="none" stroke="#4dabff" stroke-width="2"/>
+      </svg>
+    </div>
+
+
+    <!-- Interfaces & Hybrid Structures -->
+    <div class="row align-items-center">
+      <div class="col-md-6" data-aos="fade-right">
+        <img src="images/research/interface1.png" class="img-fluid rounded shadow" alt="Hybrid Interfaces">
+      </div>
+      
+      <div class="col-md-6" data-aos="fade-left">
+        <p class="mt-3">
+          A powerful way to engineer material properties is through proximity coupling.
+          By interfacing dissimilar materials, entirely new physical phenomena can emerge.
+        </p>
+        <p>
+          We investigate hybrids involving superconductors, magnetic materials, and topological
+          insulators. For example, triplet superconductivity enables the coexistence of
+          superconductivity and ferromagnetism, while magnetization can tune the surface states
+          of TI/magnetic insulator hybrids.
+        </p>
+        <p>
+          Our studies focus on the electronic properties of nano-devices fabricated from these
+          hybrid material systems.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+   
 
 
 <!-- Footer -->
@@ -349,29 +368,107 @@
   <p class="mb-0">© 2026 INOX Quantum Materials Lab</p>
 </footer>
 
-<script>
-const titleText = "Topological Insulators";
-const titleElement = document.getElementById("topo-title");
-let index = 0;
-
-function typeTitle() {
-  if (index < titleText.length) {
-    titleElement.textContent += titleText.charAt(index);
-    index++;
-    setTimeout(typeTitle, 80);
-  }
-}
-
-window.addEventListener("load", typeTitle);
-</script>
-
-
-
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init({ once: true, duration: 900, easing: 'ease-out-cubic' });
+</script>
+
+<script>
+const canvas = document.getElementById('electronCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// ---------- RESPONSIVE SETTINGS ----------
+function isMobile() {
+  return window.innerWidth < 768;
+}
+
+const ELECTRON_COUNT = isMobile() ? 30 : 50;
+const PARTICLE_COUNT = isMobile() ? 40 : 60;
+const CONNECTION_RADIUS = isMobile() ? 250 : 400;
+// ----------------------------------------
+
+// Electrons
+const electrons = Array.from({ length: ELECTRON_COUNT }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  vx: (Math.random() - 0.5) * 0.8,
+  vy: (Math.random() - 0.5) * 0.8,
+  r: Math.random() * 2 + 1.5,
+  color: ['#4dabff', '#ff3b3b', '#2ecc71'][Math.floor(Math.random() * 3)]
+}));
+
+// Quantum particles
+const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  vx: (Math.random() - 0.5) * 0.5,
+  vy: (Math.random() - 0.5) * 0.5,
+  r: Math.random() * 3 + 1.5,
+  color: ['#ffffff', '#aaffff', '#ffaaee'][Math.floor(Math.random() * 3)]
+}));
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Electrons
+  electrons.forEach(e => {
+    ctx.beginPath();
+    ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+    ctx.fillStyle = e.color;
+    ctx.fill();
+
+    e.x += e.vx;
+    e.y += e.vy;
+
+    if (e.x < 0 || e.x > canvas.width) e.vx *= -1;
+    if (e.y < 0 || e.y > canvas.height) e.vy *= -1;
+  });
+
+  // Quantum mesh
+  for (let i = 0; i < particles.length; i++) {
+    const p1 = particles[i];
+
+    ctx.beginPath();
+    ctx.arc(p1.x, p1.y, p1.r, 0, Math.PI * 2);
+    ctx.fillStyle = p1.color;
+    ctx.fill();
+
+    for (let j = i + 1; j < particles.length; j++) {
+      const p2 = particles[j];
+      const dx = p1.x - p2.x;
+      const dy = p1.y - p2.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < CONNECTION_RADIUS) {
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(170,255,255,${1 - dist / CONNECTION_RADIUS})`;
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
+      }
+    }
+
+    p1.x += p1.vx;
+    p1.y += p1.vy;
+
+    if (p1.x < 0 || p1.x > canvas.width) p1.vx *= -1;
+    if (p1.y < 0 || p1.y > canvas.height) p1.vy *= -1;
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
 </script>
 
 </body>
