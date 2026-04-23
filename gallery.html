@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>INOX Quantum Materials Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>INOX Quantum Materials Lab | Quantum Multiverse Gallery</title>
 
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,122 +14,208 @@
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- AOS Animations -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- GSAP + Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
+      background: #0a0a2a;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Navbar */
     .navbar {
       background-color: rgba(15, 15, 15, 0.98) !important;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      z-index: 100;
+      backdrop-filter: blur(2px);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
-  
-
-
-    /* Sections */
-    section {
-      padding: 100px 0;
+    .gallery-hero {
+      min-height: 100vh;
+      background: radial-gradient(circle at center, #010118 0%, #000000 100%);
+      padding-top: 100px;
+      padding-bottom: 80px;
+      position: relative;
+      overflow: hidden;
     }
-* {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-}
+    #starsCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1.5rem;
-  padding: 2rem;
-}
+    .multiverse-title {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 5;
+    }
+    .multiverse-title h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff3b3b, #4dabff, #2ecc71);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(77,171,255,0.4);
+    }
+    .multiverse-title p {
+      color: #ccc;
+      font-size: 1.2rem;
+    }
 
-/* widths + aspect ratios */
-.full {
-  grid-column: span 12;
-  aspect-ratio: 16 / 11;
-}
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 25px;
+      position: relative;
+      z-index: 10;
+    }
 
-.half {
-  grid-column: span 6;
-  aspect-ratio: 4 / 3;
-}
+    .quantum-card {
+      background: rgba(20,20,40,0.7);
+      backdrop-filter: blur(6px);
+      border-radius: 24px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(77,171,255,0.3);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .quantum-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255,59,59,0.6);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.8), 0 0 20px rgba(77,171,255,0.5);
+    }
+    .quantum-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .card-caption {
+      padding: 12px;
+      text-align: center;
+      color: #eee;
+      font-weight: 500;
+      background: rgba(0,0,0,0.7);
+      font-size: 0.85rem;
+    }
 
-.side {
-  grid-column: span 3;
-  aspect-ratio: 3 / 4;
-}
+    /* VISIBLE NEURAL NET CANVAS */
+    #quantumNeuralCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-.center {
-  grid-column: span 6;
-  aspect-ratio: 16 / 10.3;
-}
+    .explosion-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: screen;
+    }
 
-/* card */
-.card {
-  overflow: hidden;
-  border-radius: 6px;
-}
+    .focus-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s;
+      cursor: pointer;
+    }
+    .focus-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .focus-image-container {
+      max-width: 85vw;
+      max-height: 85vh;
+      position: relative;
+      transform: scale(0.8);
+      transition: transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+    .focus-modal.active .focus-image-container {
+      transform: scale(1);
+    }
+    .focus-image {
+      max-width: 100%;
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 4px rgba(255,255,255,0.2);
+      object-fit: contain;
+      background: #000;
+    }
+    .close-focus {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      background: #ff3b3b;
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      border: 2px solid white;
+    }
+    .close-focus:hover {
+      transform: scale(1.1);
+      background: #ff6b6b;
+    }
 
-/* THIS IS WHY IT LOOKS GOOD */
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* 🔥 IMAGE FITS, CROPS SLIGHTLY */
-  display: block;
-}
-
-/* responsive */
-@media (max-width: 900px) {
-  .gallery {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .full, .half, .side, .center {
-    grid-column: span 6;
-    aspect-ratio: 4 / 3;
-  }
-}
-
-@media (max-width: 500px) {
-  .gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .full, .half, .side, .center {
-    grid-column: span 1;
-  }
-}
-
-.row-caption {
-  grid-column: 1 / -1;   /* 🔥 THIS IS THE FIX */
-  text-align: center;
-  margin: 12px 0 40px;
-  font-size: 15px;
-  color: #333;
-}
-
-.caption-sub {
-  display: block;
-  font-size: 13px;
-  color: #666;
-  margin-top: 4px;
-}
-
-
-
-</style>
+    @media (max-width: 768px) {
+      .multiverse-title h1 { font-size: 2.3rem; }
+      .gallery-grid { gap: 18px; padding: 0 15px; }
+      .focus-image-container { max-width: 92vw; }
+      .close-focus { top: -10px; right: -10px; width: 38px; height: 38px; font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand fw-bold" href="#">INOX Quantum Materials Lab</a>
@@ -143,95 +229,493 @@ body {
         <li class="nav-item"><a class="nav-link" href="people.html">People</a></li>
         <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
         <li class="nav-item"><a class="nav-link" href="work-with-us.html">Work With Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
-<section class="gallery">
 
-  <!-- Row 1 -->
-  <div class="card full">
-    <img src="images/gallery/1.jpg">
-  </div>
-  <div class="row-caption">
-    INOX signs an MoU followed by a generous CSR funding to the lab.
-  </div>
-  <!-- Row 2 -->
-  <div class="card half">
-    <img src="images/gallery/2.jpg">
-  </div>
-  <div class="card half">
-    <img src="images/gallery/4.jpg">
-  </div>
-  <div class="row-caption">
-    A group hike with Prof. Dr. Christoph Strunk, U-Reg.
+<section class="gallery-hero">
+  <canvas id="starsCanvas"></canvas>
+  
+  <!-- VISIBLE NEURAL NETWORK CANVAS - NOW WITH BRIGHT CONNECTIONS -->
+  <canvas id="quantumNeuralCanvas"></canvas>
+
+  <div class="multiverse-title">
+    <h1>⚛ QUANTUM MULTIVERSE GALLERY ⚛</h1>
+    <p>Click any photo — witness supernova explosion & cosmic focus ✦</p>
   </div>
 
-  <!-- Row 3 -->
-  <div class="card half">
-    <img src="images/gallery/3.jpg">
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="quantum-card" data-img="images/gallery/1.jpg">
+      <img src="images/gallery/1.jpg" alt="INOX MoU" loading="lazy">
+      <div class="card-caption">INOX signs an MoU followed by a generous CSR funding to the lab.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/2.jpg">
+      <img src="images/gallery/2.jpg" alt="Group hike 1" loading="lazy">
+      <div class="card-caption">A group hike with Prof. Dr. Christoph Strunk, U-Reg.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/4.jpg">
+      <img src="images/gallery/4.jpg" alt="Group hike 2" loading="lazy">
+      <div class="card-caption">Beautiful moments during the group hike.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/3.jpg">
+      <img src="images/gallery/3.jpg" alt="Dr. Moodera visit 1" loading="lazy">
+      <div class="card-caption">Dr. J. S. Moodera, MIT, USA, visits the lab.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/5.jpg">
+      <img src="images/gallery/5.jpg" alt="Dr. Moodera visit 2" loading="lazy">
+      <div class="card-caption">Engaging discussions on quantum materials.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/6.jpg">
+      <img src="images/gallery/6.jpg" alt="Open day prep" loading="lazy">
+      <div class="card-caption">IISc open day 2025: preparations for SC levitation.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/7.jpg">
+      <img src="images/gallery/7.jpg" alt="Open day group" loading="lazy">
+      <div class="card-caption">IISc open day 2025: group picture at the stall.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/8.jpg">
+      <img src="images/gallery/8.jpg" alt="Explaining SC" loading="lazy">
+      <div class="card-caption">Gaurav explaining superconductivity to a school kid.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/9.png">
+      <img src="images/gallery/9.png" alt="Trip left" loading="lazy">
+      <div class="card-caption">Rajib, Sohini, DS, Subhransu at Sakaleshpura.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/10.png">
+      <img src="images/gallery/10.png" alt="Trip center" loading="lazy">
+      <div class="card-caption">The whole group as of June 2025 at Sakaleshpura.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/11.png">
+      <img src="images/gallery/11.png" alt="Trip right" loading="lazy">
+      <div class="card-caption">Rajib and Jagadish — the jump pic pros.</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/12.jpeg">
+      <img src="images/gallery/12.jpeg" alt="Trip right" loading="lazy">
+      <div class="card-caption">Prof. Dhavala presenting in Science Gallery, Bengaluru</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/13.jpeg">
+      <img src="images/gallery/13.jpeg" alt="Trip right" loading="lazy">
+      <div class="card-caption">Students during Prof. Dhavala's presentation in Science Gallery</div>
+    </div>
+    <div class="quantum-card" data-img="images/gallery/14.jpg">
+      <img src="images/gallery/14.jpg" alt="Trip right" loading="lazy">
+      <div class="card-caption">Sohini Guin presenting Magnetic Tunnel Junction in Science Gallery, Bengaluru</div>
+    </div>
   </div>
-  <div class="card half">
-    <img src="images/gallery/5.jpg">
-  </div>
-  <div class="row-caption">
-    Dr. J. S. Moodera, MIT, USA, visits the lab.
-  </div>
-
-  <!-- Row 4 (6,7,8) -->
-  <div class="card side">
-    <img src="images/gallery/6.jpg">
-  </div>
-  <div class="card center">
-    <img src="images/gallery/7.jpg">
-  </div>
-  <div class="card side">
-    <img src="images/gallery/8.jpg">
-  </div>
-  <div class="row-caption">
-    IISc open day 2025: preparations for SC levitation, group pic on spot,
-    Gaurav explaining superconductivity to a school kid.
-  </div>
-
-  <!-- Row 5 (9,10,11) -->
-  <div class="card side">
-    <img src="images/gallery/9.png">
-  </div>
-  <div class="card center">
-    <img src="images/gallery/10.png">
-  </div>
-  <div class="card side">
-    <img src="images/gallery/11.png">
-  </div>
-  <div class="row-caption">
-    Group annual trip to Sakaleshpura<br>
-    <span class="caption-sub">
-      left (Rajib, Sohini, DS, Subhransu; center: the whole group as of June 2025;
-      Rajib and Jagadish the jump pic pros.)
-    </span>
-  </div>
-
 </section>
 
+<canvas id="threeCanvas" style="position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:15;"></canvas>
+<div class="explosion-overlay" id="explosionOverlay"></div>
 
+<div class="focus-modal" id="focusModal">
+  <div class="focus-image-container" id="focusImageContainer">
+    <img class="focus-image" id="focusImage" alt="Focused view">
+    <div class="close-focus" id="closeFocusBtn">×</div>
+  </div>
+</div>
 
-
-
-
-
-<!-- Footer -->
-<footer class="text-center py-4">
-  <p class="mb-0">© 2026 INOX Quantum Materials Lab</p>
-</footer>
-
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
 <script>
-  AOS.init({ once: true, duration: 900, easing: 'ease-out-cubic' });
+  (function(){
+    // ============================================================
+    // HIGHLY VISIBLE QUANTUM NEURAL NETWORK
+    // Bright particles + glowing connections that you can clearly see
+    // ============================================================
+    const neuralCanvas = document.getElementById('quantumNeuralCanvas');
+    let neuralCtx = neuralCanvas.getContext('2d');
+    let neuralParticles = [];
+    let neuralAnimationId = null;
+    const NEURAL_PARTICLE_COUNT = 100;  // More particles for denser network
+    const NEURAL_CONNECTION_DIST = 250;  // Longer connections
+    
+    function initNeuralNetwork() {
+      neuralCanvas.width = window.innerWidth;
+      neuralCanvas.height = window.innerHeight;
+      neuralParticles = [];
+      for (let i = 0; i < NEURAL_PARTICLE_COUNT; i++) {
+        neuralParticles.push({
+          x: Math.random() * neuralCanvas.width,
+          y: Math.random() * neuralCanvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          radius: 2.5 + Math.random() * 3,
+          // Brighter colors: cyan, blue, purple
+          color: `hsla(${180 + Math.random() * 60}, 100%, 60%, ${0.6 + Math.random() * 0.4})`
+        });
+      }
+    }
+    
+    function drawNeuralNetwork() {
+      if (!neuralCtx) return;
+      neuralCtx.clearRect(0, 0, neuralCanvas.width, neuralCanvas.height);
+      
+      // Draw GLOWING connections first (neural webs) - MUCH MORE VISIBLE
+      for (let i = 0; i < neuralParticles.length; i++) {
+        const p1 = neuralParticles[i];
+        for (let j = i + 1; j < neuralParticles.length; j++) {
+          const p2 = neuralParticles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < NEURAL_CONNECTION_DIST) {
+            // Brighter opacity - now very visible!
+            const opacity = (1 - dist / NEURAL_CONNECTION_DIST) * 0.6;
+            neuralCtx.beginPath();
+            neuralCtx.moveTo(p1.x, p1.y);
+            neuralCtx.lineTo(p2.x, p2.y);
+            neuralCtx.strokeStyle = `rgba(77, 200, 255, ${opacity})`;
+            neuralCtx.lineWidth = 1.5;
+            neuralCtx.stroke();
+            
+            // Add a second thinner glow line
+            neuralCtx.beginPath();
+            neuralCtx.moveTo(p1.x, p1.y);
+            neuralCtx.lineTo(p2.x, p2.y);
+            neuralCtx.strokeStyle = `rgba(150, 220, 255, ${opacity * 0.5})`;
+            neuralCtx.lineWidth = 3;
+            neuralCtx.stroke();
+          }
+        }
+      }
+      
+      // Draw particles with glow effect
+      for (let p of neuralParticles) {
+        neuralCtx.beginPath();
+        neuralCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        neuralCtx.fillStyle = p.color;
+        neuralCtx.shadowBlur = 12;
+        neuralCtx.shadowColor = '#4dabff';
+        neuralCtx.fill();
+        
+        // Inner bright core
+        neuralCtx.beginPath();
+        neuralCtx.arc(p.x, p.y, p.radius * 0.5, 0, Math.PI * 2);
+        neuralCtx.fillStyle = 'white';
+        neuralCtx.fill();
+        
+        // Update position
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        // Wrap around edges
+        if (p.x < -50) p.x = neuralCanvas.width + 50;
+        if (p.x > neuralCanvas.width + 50) p.x = -50;
+        if (p.y < -50) p.y = neuralCanvas.height + 50;
+        if (p.y > neuralCanvas.height + 50) p.y = -50;
+      }
+      neuralCtx.shadowBlur = 0;
+      neuralAnimationId = requestAnimationFrame(drawNeuralNetwork);
+    }
+    
+    window.addEventListener('resize', () => {
+      neuralCanvas.width = window.innerWidth;
+      neuralCanvas.height = window.innerHeight;
+      initNeuralNetwork();
+    });
+    
+    initNeuralNetwork();
+    drawNeuralNetwork();
+    
+    // ============================================================
+    // SUPERNOVA SYSTEM (keeping your original working code)
+    // ============================================================
+    const canvas3d = document.getElementById('threeCanvas');
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    const scene = new THREE.Scene();
+    scene.background = null;
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 12);
+    
+    let activePhotos = [];
+    let currentExplosionTimeout = null;
+    
+    const focusModal = document.getElementById('focusModal');
+    const focusImage = document.getElementById('focusImage');
+    const closeFocusBtn = document.getElementById('closeFocusBtn');
+    const focusContainer = document.getElementById('focusImageContainer');
+    
+    function closeFocusModal() {
+      if (!focusModal.classList.contains('active')) return;
+      focusModal.classList.remove('active');
+      focusImage.src = '';
+    }
+    
+    function randomRange(min, max) { return min + Math.random() * (max - min); }
+    
+    function cleanupExplosion() {
+      if (currentExplosionTimeout) clearTimeout(currentExplosionTimeout);
+      activePhotos.forEach(photo => {
+        if (photo.parent) scene.remove(photo);
+      });
+      activePhotos = [];
+    }
+    
+    function triggerSupernovaAndScatter(imageUrl, clickX, clickY, titleText, finalImageUrl) {
+      cleanupExplosion();
+      
+      const vector = new THREE.Vector3();
+      vector.set((clickX / window.innerWidth) * 2 - 1, -(clickY / window.innerHeight) * 2 + 1, 0.5);
+      vector.unproject(camera);
+      const dir = vector.sub(camera.position).normalize();
+      const distance = -camera.position.z / dir.z;
+      const pos3D = camera.position.clone().add(dir.multiplyScalar(distance));
+      
+      const particleCount = 220;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        positions[i*3] = pos3D.x + (Math.random() - 0.5) * 0.6;
+        positions[i*3+1] = pos3D.y + (Math.random() - 0.5) * 0.6;
+        positions[i*3+2] = pos3D.z + (Math.random() - 0.5) * 1.0;
+        const colorChoice = Math.random();
+        let r=1, g=0.5, b=0.2;
+        if (colorChoice < 0.6) { r=1; g=0.2+Math.random()*0.5; b=0; }
+        else if (colorChoice < 0.8) { r=0.2; g=0.6; b=1; }
+        else { r=1; g=1; b=0.8; }
+        colors[i*3] = r;
+        colors[i*3+1] = g;
+        colors[i*3+2] = b;
+      }
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      const particleMaterial = new THREE.PointsMaterial({ size: 0.12, vertexColors: true, blending: THREE.AdditiveBlending });
+      const explosionParticles = new THREE.Points(geometry, particleMaterial);
+      scene.add(explosionParticles);
+      
+      const velocities = [];
+      for (let i = 0; i < particleCount; i++) {
+        velocities.push({
+          vx: (Math.random() - 0.5) * 0.7,
+          vy: (Math.random() - 0.5) * 0.7,
+          vz: (Math.random() - 0.5) * 0.5 + 0.4
+        });
+      }
+      let startTime = performance.now();
+      let explosionActive = true;
+      
+      function animateExplosion() {
+        if (!explosionActive) return;
+        const now = performance.now();
+        const elapsed = (now - startTime) / 1000;
+        if (elapsed > 0.9) {
+          scene.remove(explosionParticles);
+          explosionActive = false;
+          return;
+        }
+        const positionsAttr = geometry.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          const v = velocities[i];
+          positionsAttr[i*3] += v.vx * 0.3;
+          positionsAttr[i*3+1] += v.vy * 0.3;
+          positionsAttr[i*3+2] += v.vz * 0.4;
+        }
+        geometry.attributes.position.needsUpdate = true;
+        requestAnimationFrame(animateExplosion);
+      }
+      requestAnimationFrame(animateExplosion);
+      
+      const overlay = document.getElementById('explosionOverlay');
+      overlay.style.transition = 'background 0.1s ease-out';
+      overlay.style.background = 'radial-gradient(circle at center, rgba(255,180,80,0.7) 0%, rgba(255,50,0,0.5) 100%)';
+      setTimeout(() => { overlay.style.background = 'transparent'; }, 150);
+      
+      const textureLoader = new THREE.TextureLoader();
+      const imgTexture = textureLoader.load(finalImageUrl, undefined, undefined, () => {});
+      const shardCount = 20;
+      const shardMeshes = [];
+      for (let i = 0; i < shardCount; i++) {
+        const width = 0.6;
+        const height = 0.6;
+        const geometryPlane = new THREE.PlaneGeometry(width, height);
+        const material = new THREE.MeshBasicMaterial({ map: imgTexture, side: THREE.DoubleSide, transparent: true, opacity: 0.9 });
+        const shard = new THREE.Mesh(geometryPlane, material);
+        shard.position.set(pos3D.x, pos3D.y, pos3D.z);
+        shard.userData = {
+          vel: new THREE.Vector3(
+            (Math.random() - 0.5) * 1.2,
+            (Math.random() - 0.5) * 1.1 - 0.3,
+            (Math.random() - 0.5) * 1.0 + 0.6
+          ),
+          rotSpeed: new THREE.Vector3(Math.random() * 0.12, Math.random() * 0.12, Math.random() * 0.12),
+          life: 1.0
+        };
+        scene.add(shard);
+        shardMeshes.push(shard);
+        activePhotos.push(shard);
+      }
+      
+      const corePhotoGeo = new THREE.PlaneGeometry(0.9, 0.9);
+      const coreMaterial = new THREE.MeshBasicMaterial({ map: imgTexture, transparent: true });
+      const corePhoto = new THREE.Mesh(corePhotoGeo, coreMaterial);
+      corePhoto.position.set(pos3D.x, pos3D.y, pos3D.z);
+      scene.add(corePhoto);
+      activePhotos.push(corePhoto);
+      
+      let shardAnimId;
+      function animateScatter() {
+        let anyAlive = false;
+        shardMeshes.forEach(shard => {
+          if (!shard.parent) return;
+          anyAlive = true;
+          shard.userData.vel.y -= 0.008;
+          shard.position.x += shard.userData.vel.x * 0.18;
+          shard.position.y += shard.userData.vel.y * 0.18;
+          shard.position.z += shard.userData.vel.z * 0.18;
+          shard.rotation.x += shard.userData.rotSpeed.x;
+          shard.rotation.y += shard.userData.rotSpeed.y;
+          shard.rotation.z += shard.userData.rotSpeed.z;
+          shard.userData.life -= 0.012;
+          if (shard.material) shard.material.opacity = Math.max(0, shard.userData.life);
+          if (shard.userData.life <= 0.02) scene.remove(shard);
+        });
+        if (corePhoto.parent) {
+          corePhoto.scale.x += 0.04;
+          corePhoto.scale.y += 0.04;
+          corePhoto.material.opacity -= 0.02;
+          if (corePhoto.material.opacity <= 0) scene.remove(corePhoto);
+        }
+        if (!anyAlive && (!corePhoto.parent || corePhoto.material.opacity <= 0)) {
+          cancelAnimationFrame(shardAnimId);
+        } else {
+          shardAnimId = requestAnimationFrame(animateScatter);
+        }
+      }
+      shardAnimId = requestAnimationFrame(animateScatter);
+      
+      const ringGeo = new THREE.RingGeometry(0.15, 0.7, 24);
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0xff8844, side: THREE.DoubleSide, transparent: true, opacity: 0.7 });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.position.set(pos3D.x, pos3D.y, pos3D.z);
+      scene.add(ring);
+      gsap.to(ring.scale, { x: 4, y: 4, duration: 0.6, ease: "power2.out" });
+      gsap.to(ring.material, { opacity: 0, duration: 0.5, onComplete: () => scene.remove(ring) });
+      
+      currentExplosionTimeout = setTimeout(() => {
+        focusImage.src = finalImageUrl;
+        focusModal.classList.add('active');
+      }, 450);
+    }
+    
+    // Starfield
+    const starsCanvas = document.getElementById('starsCanvas');
+    const starsCtx = starsCanvas.getContext('2d');
+    let starField = [];
+    function initStars() {
+      starsCanvas.width = window.innerWidth;
+      starsCanvas.height = window.innerHeight;
+      const starCount = 350;
+      for (let i = 0; i < starCount; i++) {
+        starField.push({
+          x: Math.random() * starsCanvas.width,
+          y: Math.random() * starsCanvas.height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random() * 0.6 + 0.2,
+        });
+      }
+      function drawStars() {
+        starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+        starsCtx.fillStyle = "#05051a";
+        starsCtx.fillRect(0, 0, starsCanvas.width, starsCanvas.height);
+        for (let s of starField) {
+          starsCtx.beginPath();
+          starsCtx.arc(s.x, s.y, s.radius, 0, Math.PI*2);
+          starsCtx.fillStyle = `rgba(255,240,200,${s.alpha})`;
+          starsCtx.fill();
+          s.alpha += (Math.random() - 0.5) * 0.02;
+          s.alpha = Math.min(0.8, Math.max(0.2, s.alpha));
+        }
+        requestAnimationFrame(drawStars);
+      }
+      drawStars();
+    }
+    window.addEventListener('resize', () => {
+      starsCanvas.width = window.innerWidth;
+      starsCanvas.height = window.innerHeight;
+      starField = [];
+      initStars();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
+    initStars();
+    
+    function renderLoop() {
+      renderer.render(scene, camera);
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+    
+    // Click handlers
+    const cards = document.querySelectorAll('.quantum-card');
+    cards.forEach(card => {
+      const imgSrc = card.getAttribute('data-img');
+      card.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (focusModal.classList.contains('active')) return;
+        const rect = card.getBoundingClientRect();
+        const clickX = rect.left + rect.width / 2;
+        const clickY = rect.top + rect.height / 2;
+        if (imgSrc) {
+          card.style.transform = 'scale(0.97)';
+          setTimeout(() => { card.style.transform = ''; }, 150);
+          triggerSupernovaAndScatter(imgSrc, clickX, clickY, '', imgSrc);
+        }
+      });
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { duration: 0.2, scale: 1.05, boxShadow: "0 0 40px rgba(77,171,255,0.9)" });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { duration: 0.3, scale: 1, boxShadow: "0 15px 35px rgba(0,0,0,0.5)" });
+      });
+    });
+    
+    cards.forEach(card => {
+      card.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (focusModal.classList.contains('active')) return;
+        const rect = card.getBoundingClientRect();
+        const touchX = rect.left + rect.width/2;
+        const touchY = rect.top + rect.height/2;
+        const imgSrc = card.getAttribute('data-img');
+        if (imgSrc) {
+          card.style.transform = 'scale(0.97)';
+          setTimeout(() => { card.style.transform = ''; }, 150);
+          triggerSupernovaAndScatter(imgSrc, touchX, touchY, '', imgSrc);
+        }
+      });
+    });
+    
+    focusModal.addEventListener('click', (e) => {
+      if (e.target === focusModal || e.target === closeFocusBtn || e.target.classList.contains('close-focus')) {
+        closeFocusModal();
+      }
+    });
+    closeFocusBtn.addEventListener('click', closeFocusModal);
+    focusContainer.addEventListener('click', (e) => e.stopPropagation());
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && focusModal.classList.contains('active')) closeFocusModal();
+    });
+    
+    window.addEventListener('resize', () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
+    
+    console.log("✨ Neural network is now VISIBLE! Look for glowing blue connections between particles.");
+  })();
 </script>
+
+<footer class="text-center py-4" style="background: #111; color: #aaa;">
+  <p class="mb-0">© 2026 INOX Quantum Materials Lab — where matter meets multiverse</p>
+</footer>
 
 </body>
 </html>
