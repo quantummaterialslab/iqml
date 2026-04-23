@@ -28,6 +28,26 @@
       background-color: rgba(15, 15, 15, 0.98) !important;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
+    /* CSS-only responsive text replacement */
+    @media (max-width: 768px) {
+      .navbar-brand .brand-text {
+        font-size: 0;
+      }
+      .navbar-brand .brand-text::before {
+        content: "INOX Quantum Lab";
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar-brand .brand-text {
+        font-size: 0;
+      }
+      .navbar-brand .brand-text::before {
+        content: "IQML";
+        font-size: 1rem;
+      }
+    }
 
     /* Hero */
     .hero {
@@ -248,16 +268,17 @@
 
 
 
+
 </style>
 </head>
 <body>
 
-<!-- Navbar with Logo -->
+<!-- Simpler version with CSS text replacement -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
       <img src="images/iqml_logo.png" alt="IQML Logo" height="40" class="me-2">
-      INOX Quantum Materials Lab
+      <span class="brand-text">INOX Quantum Materials Lab</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#labNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -270,7 +291,7 @@
         <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
         <li class="nav-item"><a class="nav-link" href="work-with-us.html">Work With Us</a></li>
         <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
       </ul>
     </div>
   </div>
