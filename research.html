@@ -214,7 +214,7 @@
   <div class="container">
     <!-- Research Intro Section -->
     <div class="research-intro-section" data-aos="fade-up">
-      <h2 class="fw-bold mb-3">Research</h2>
+      <h2 class="fw-bold mb-3">⚛⚛⚛⚛⚛ RESEARCH ⚛⚛⚛⚛⚛</h2>
       <p class="opacity-90">
         We study the physics of epitaxial materials and interfaces of the following class of materials.
       </p>
@@ -228,7 +228,7 @@
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
           </g>
         </svg>
-        <span>Topological Insulators</span>
+        <span>⚛ Topological Insulators ⚛</span>
         <svg class="sine right" viewBox="0 0 150 40" preserveAspectRatio="none">
           <g class="wave-move">
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
@@ -254,7 +254,7 @@
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
           </g>
         </svg>
-        <span>Superconductors</span>
+        <span>⚛ Superconductors ⚛</span>
         <svg class="sine right" viewBox="0 0 150 40" preserveAspectRatio="none">
           <g class="wave-move">
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
@@ -280,7 +280,7 @@
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
           </g>
         </svg>
-        <span>Interface & Hybrid Structures</span>
+        <span>⚛ Interface & Hybrid Structures ⚛</span>
         <svg class="sine right" viewBox="0 0 150 40" preserveAspectRatio="none">
           <g class="wave-move">
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
@@ -307,7 +307,7 @@
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
           </g>
         </svg>
-        <span>Devices</span>
+        <span>⚛ Devices ⚛</span>
         <svg class="sine right" viewBox="0 0 150 40" preserveAspectRatio="none">
           <g class="wave-move">
             <path d="M0,20 C15,0 30,40 45,20 C60,0 75,40 90,20 C105,0 120,40 135,20 C150,0 165,40 180,20" fill="none" stroke="#4dabff" stroke-width="2"/>
@@ -357,16 +357,16 @@
     }
     
     // Responsive settings - much smaller on mobile
-    let PARTICLE_COUNT = 45;
-    let CONNECTION_DIST = 120;
-    let SPHERE_COUNT = 8;
-    let PARTICLE_SPEED = 0.2;
-    let PARTICLE_RADIUS_MIN = 1.0;
-    let PARTICLE_RADIUS_MAX = 2.2;
-    let SPHERE_RADIUS_MIN = 20;
-    let SPHERE_RADIUS_MAX = 60;
-    let SPHERE_ALPHA = 0.025;
-    
+    // Responsive settings - INCREASED for more visible neural net
+    let PARTICLE_COUNT = 150;      // More particles = denser network (was 85)
+    let CONNECTION_DIST = 420;     // Longer connections = more lines (was 30 - THIS WAS TOO LOW!)
+    let SPHERE_COUNT = 12;         // More floating orbs (was 8)
+    let PARTICLE_SPEED = 0.3;      // Slightly faster movement (was 0.2)
+    let PARTICLE_RADIUS_MIN = 1.5;  // Larger minimum particle size (was 1.0)
+    let PARTICLE_RADIUS_MAX = 3.5;  // Larger maximum particle size (was 2.2)
+    let SPHERE_RADIUS_MIN = 125;     // Slightly larger orbs (was 20)
+    let SPHERE_RADIUS_MAX = 80;     // Larger maximum orb size (was 60)
+    let SPHERE_ALPHA = 0.04;        // More visible orbs (was 0.025)
     function updateResponsiveSettings() {
       if (isMobile()) {
         PARTICLE_COUNT = 35;
